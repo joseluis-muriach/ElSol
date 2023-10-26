@@ -6,12 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.elsol.ui.theme.ElSolTheme
-import com.example.elsol.ui.theme.ItemPicture
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ItemPicture()
+                    val navController  = rememberNavController()
+                    NavHost(navController = navController, startDestination = "Cover"){
+                        composable("Cover") { Cover(navController = navController) }
+                        composable("Filled.Email") { Email() }
+                        composable("Filled.Info") { Info() }
+                        composable("Filled.Build") {  Cover(navController = navController) }
+                    }
                 }
             }
         }
